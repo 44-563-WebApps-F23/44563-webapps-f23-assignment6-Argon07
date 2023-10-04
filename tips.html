@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tips Calculator</title>
+</head>
+<body>
+    <h1>Agraja Shows Tip Amounts</h1>
+
+    <!-- Input for the base amount -->
+    <label for="baseAmount">Enter base amount:</label>
+    <input type="number" id="baseAmount" value="50"><br>
+
+    <!-- Input for the tip percent -->
+    <label for="tipPercent">Enter the tip percent:</label>
+    <input type="number" id="tipPercent" value="15"><br>
+
+    <!-- Button to calculate and show tips -->
+    <input type="button" onclick="tips()" value="Show tip"><br>
+
+    <!-- Element to display results -->
+    <p id="result">Tips are:</p>
+
+    <script>
+        function tips() {
+            const baseAmount = parseFloat(document.getElementById("baseAmount").value);
+            const tipPercent = parseFloat(document.getElementById("tipPercent").value);
+            let toShow = "";
+
+            for (let i = 0; i < 5; i++) {
+                const tipAmount = (baseAmount * (tipPercent + i * 4)) / 100;
+                toShow += `${tipPercent + i * 4}% is ${tipAmount.toFixed(2)}; `;
+            }
+
+            const resultElement = document.getElementById("result");
+            resultElement.innerHTML = "Tips are: " + toShow;
+        }
+    </script>
+</body>
+</html>
