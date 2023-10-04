@@ -23,10 +23,16 @@
     <!-- Element to display results -->
     <p id="result">Good: 0 | Oops: 0</p>
 
+    <!-- Add a div container -->
+    <div id="imageContainer">
+        <img id="cityImage" src="toronto.jpg" alt="City" width="100" height="100" onclick="selectImage()">
+    </div>
+
     <script>
         
         var good = 0;
         var oops = 0;
+        var useImage = 1;
 
         // Function to check the author guess
         function checkAuthor() {
@@ -48,6 +54,25 @@
             // Update the innerHTML of the result element
             const resultElement = document.getElementById("result");
             resultElement.innerHTML = "Good: " + good + " | Oops: " + oops;
+        }
+
+        // Function to switch between images
+        function selectImage() {
+            const imageElement = document.getElementById("cityImage");
+            switch (useImage) {
+                case 1:
+                    imageElement.src = "paris.jpg";
+                    useImage = 2;
+                    break;
+                case 2:
+                    imageElement.src = "oslo.jpg";
+                    useImage = 3;
+                    break;
+                case 3:
+                    imageElement.src = "toronto.jpg";
+                    useImage = 1;
+                    break;
+            }
         }
     </script>
 </body>
