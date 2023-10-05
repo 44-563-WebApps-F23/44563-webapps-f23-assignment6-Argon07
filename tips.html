@@ -1,38 +1,82 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tips Calculator</title>
+    <title>Tips Calculator and Calculator Switcher</title>
 </head>
 <body>
     <h1>Agraja Shows Tip Amounts</h1>
 
-    <!-- Input for the base amount -->
     <label for="baseAmount">Enter base amount:</label>
+    <br>
     <input type="number" id="baseAmount" value="50"><br>
-
-    <!-- Input for the tip percent -->
+    <br>
     <label for="tipPercent">Enter the tip percent:</label>
+    <br>
     <input type="number" id="tipPercent" value="15"><br>
-
-    <!-- Button to calculate and show tips -->
-    <input type="button" onclick="tips()" value="Show tip"><br>
-
-    <!-- Element to display results -->
-    <p id="result">Tips are:</p>
+    <input type="button" onclick="calculateTips()" value="Show tip"><br>
+    <p id="tipResult">Tips are:</p>
+    <br>
+    <br>
+    <form id="calculatorForm">
+        <div>
+            <input type="radio" id="sum" name="calculation" value="sum" onclick="chooseOp()">
+            <label for="sum">Sum</label>
+        
+            <input type="radio" id="diff" name="calculation" value="difference" onclick="chooseOp()">
+            <label for="diff">Difference</label>
+        
+            <input type="radio" id="mult" name="calculation" value="product" onclick="chooseOp()">
+            <label for="mult">Product</label>
+        </div>
+    </form>
+    <p id="Result">Result:</p>
 
     <script>
-        function tips() {
+        function calculateTips() {
+    const baseAmount = parseFloat(document.getElementById("baseAmount").value);
+    const tipPercent = parseFloat(document.getElementById("tipPercent").value);
+    let toShow = "";
+
+    for (let i = 0; i < 5; i++) {
+        const calculatedTip = (baseAmount * (tipPercent + i * 4)) / 100;
+        const formattedTip = calculatedTip % 1 === 0 ? calculatedTip.toFixed(0) : calculatedTip.toFixed(1);
+        toShow += `${tipPercent + i * 4}% is ${formattedTip}; `;
+    }
+
+    const tipElement = document.getElementById("tipResult");
+    tipElement.innerHTML = "Tip are: " + toShow;
+}
+
+        function chooseOp() {
             const baseAmount = parseFloat(document.getElementById("baseAmount").value);
             const tipPercent = parseFloat(document.getElementById("tipPercent").value);
-            let toShow = "";
-
-            for (let i = 0; i < 5; i++) {
-                const tipAmount = (baseAmount * (tipPercent + i * 4)) / 100;
-                toShow += `${tipPercent + i * 4}% is ${tipAmount.toFixed(2)}; `;
+            let cal = "";
+            const radios = document.getElementsByName("calculation");
+            for (let i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    cal = radios[i].value;
+                    break;
+                }
             }
 
-            const resultElement = document.getElementById("result");
-            resultElement.innerHTML = "Tips are: " + toShow;
+            let result = "";
+
+            switch (cal) {
+                case "sum":
+                    result = `Sum of ${baseAmount} and ${tipPercent} is ${baseAmount + tipPercent}`;
+                    break;
+                case "difference":
+                    result = `Difference between ${baseAmount} and ${tipPercent} is ${baseAmount - tipPercent}`;
+                    break;
+                case "product":
+                    result = `Product of ${baseAmount} and ${tipPercent} is ${baseAmount * tipPercent}`;
+                    break;
+                default:
+                    result = "Select an operation.";
+            }
+
+            const ResultElement = document.getElementById("Result");
+            ResultElement.innerHTML = "Result: " + result;
         }
     </script>
 </body>
