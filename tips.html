@@ -2,34 +2,47 @@
 <html>
 <head>
     <title>Tips Calculator and Calculator Switcher</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" 
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" 
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Agraja Shows Tip Amounts</h1>
 
-    <label for="baseAmount">Enter base amount:</label>
-    <br>
-    <input type="number" id="baseAmount" value="50"><br>
-    <br>
-    <label for="tipPercent">Enter the tip percent:</label>
-    <br>
-    <input type="number" id="tipPercent" value="15"><br>
-    <input type="button" onclick="calculateTips()" value="Show tip"><br>
-    <p id="tipResult">Tips are:</p>
+    <div class="container py-5">
+        <h1 class="text-success">Agraja Shows Tip Amounts</h1>
+
+        <div class="mb-3">
+            <label for="baseAmount" >Enter base amount:</label>
+            <input type="number" id="baseAmount" value="50">
+        </div>
+
+        <div class="mb-3">
+            <label for="tipPercent" >Enter the tip percent:</label>
+            <input type="number" id="tipPercent" value="15">
+        </div>
+
+        <button class="btn btn-success" onclick="calculateTips()">Show tip</button>
+        
+        <p id="tipResult" >Tips are:</p>
+
     <br>
     <br>
     <form id="calculatorForm">
-        <div>
-            <input type="radio" id="sum" name="calculation" value="sum" onclick="chooseOp()">
+        <div class="mb-3">
+            <input type="radio" id="sum" name="calculation" value="sum" class="from-check-input" onclick="chooseOp()">
             <label for="sum">Sum</label>
-        
-            <input type="radio" id="diff" name="calculation" value="difference" onclick="chooseOp()">
+    
+            <input type="radio" id="diff" name="calculation" value="difference" class="from-check-input" onclick="chooseOp()">
             <label for="diff">Difference</label>
-        
-            <input type="radio" id="mult" name="calculation" value="product" onclick="chooseOp()">
+    
+            <input type="radio" id="mult" name="calculation" value="product" class="from-check-input" onclick="chooseOp()">
             <label for="mult">Product</label>
         </div>
     </form>
-    <p id="Result">Result:</p>
+    <p id="Result" >Result:</p>
 
     <script>
         function calculateTips() {
