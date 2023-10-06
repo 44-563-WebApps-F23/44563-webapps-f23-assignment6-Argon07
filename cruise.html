@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cruise Selection</title>
+</head>
+<body>
+    <h1>Agraja goes on a cruise</h1>
+
+    <!-- Form group with labeled checkboxes -->
+    <form id="cruiseForm">
+        <label for="checkbox1">Shares Cabin:</label>
+        <input type="checkbox" id="checkbox1" value="True"> <br>
+
+        <label for="checkbox2">Breakfast:</label>
+        <input type="checkbox" id="checkbox2" value="True"> <br>
+
+        <label for="checkbox3">Pool Pass:</label>
+        <input type="checkbox" id="checkbox3" value="False"> <br>
+
+        <input type="button" onclick="selectCruise()" value="Select a cruise"> <br>
+    </form>
+    <p id="cruiseResult"></p>
+    <br>
+
+    <form id="updateForm">
+        <label for="days">Enter the number of days:</label>
+        <br>
+        <input type="text" id="days" value="days"><br>
+
+        <label for="price">Enter price:</label>
+        <br>
+        <input type="text" id="price"><br>
+
+        <!-- Button to update the cruise -->
+        <input type="button" onclick="updateCruise()" value="Update the cruise"><br>
+    </form>
+
+    <p id="updateResult"></p>
+
+    <script>
+        // Declare a global variable my_cruise and set it to an empty object
+        var my_cruise = {};
+
+        // Function to select a cruise
+        function selectCruise() {
+            // Reset my_cruise to an empty object
+            my_cruise = {};
+
+            // Get the checkbox values
+            const sharesCabin = document.getElementById("checkbox1").checked;
+            const breakfast = document.getElementById("checkbox2").checked;
+            const poolPass = document.getElementById("checkbox3").checked;
+
+            // Set properties in my_cruise based on checkbox values
+            my_cruise.shared = sharesCabin;
+            my_cruise.breakfast = breakfast;
+            my_cruise.pool = poolPass;
+
+            // Display my_cruise object for Select Cruise result
+            const cruiseResultElement = document.getElementById("cruiseResult");
+            cruiseResultElement.innerHTML = "Select Cruise result: " + JSON.stringify(my_cruise);
+        }
+
+        // Function to update the cruise details
+        function updateCruise() {
+            const propertyName = document.getElementById("days").value;
+            const price = document.getElementById("price").value;
+
+            my_cruise[propertyName] = price;
+
+            // Display my_cruise object for Updated Result
+            const updateResultElement = document.getElementById("updateResult");
+            updateResultElement.innerHTML = "Updated cruise details: " + JSON.stringify(my_cruise);
+        }
+    </script>
+</body>
+</html>

@@ -8,22 +8,13 @@
     <h2>Guess the Author</h2>
 
     <form>
-        <!-- Input for the secret string (hidden author name) -->
         <label for="secretInput">The hidden author name:</label>
         <input type="password" id="secretInput" name="secretInput" value="Dickens" required><br>
-
-        <!-- Input for the user's guess -->
         <label for="guessInput">Guess the author:</label>
         <input type="text" id="guessInput" name="guessInput" required><br>
-
-        <!-- Button to check the guess -->
         <input type="button" onclick="checkAuthor()" value="Check the guess">
     </form>
-
-    <!-- Element to display results -->
     <p id="result">Good: 0 | Oops: 0</p>
-
-    <!-- Add a div container -->
     <div id="imageContainer">
         <img id="cityImage" src="paris.jpg" alt="City" width="100" height="100" onclick="selectImage()">
     </div>
@@ -33,6 +24,7 @@
         var good = 0;
         var oops = 0;
         var useImage = 1;
+        var guess = 0;
 
         // Function to check the author guess
         function checkAuthor() {
@@ -48,7 +40,16 @@
                 alert("You got it right!");
             } else {
                 oops++;
+                guess++;
                 alert("Sorry");
+            
+             if (guess >= 7) {
+                    // Replace the onclick property with a new function
+                    document.getElementById("result").innerHTML = "Good: " + good + " | Oops: " + oops;
+                    document.querySelector('input[type="button"]').onclick = function() {
+                        alert("Sorry, ran out of guesses.");
+                    }
+                }
             }
 
             // Update the innerHTML of the result element
